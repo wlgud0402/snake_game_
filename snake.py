@@ -8,6 +8,7 @@ class MAIN:
     def __init__(self):
         self.snake = SNAKE()
         self.fruit = FRUIT()
+        self.snake.background_sound.play(True)
 
     def update(self):
         self.snake.move_snake()
@@ -22,8 +23,8 @@ class MAIN:
 
     def check_collision(self):
         if self.fruit.pos == self.snake.body[0]:
-            self.fruit.randomize()  # reposition the fruit
-            self.snake.add_block()  # add another block to the snake
+            self.fruit.randomize()  # 과일 재배치
+            self.snake.add_block()  # 과일을 먹었으므로 뱀의 길이 늘려줌
             self.snake.play_crunch_sound()
 
         # 혹시나 몸에 생기면 다시 생성
@@ -32,20 +33,19 @@ class MAIN:
                 self.fruit.randomize()
 
     def check_fail(self):
-        # check if snake if outside ot the screen
+        # 뱀이 머리를 스크린에 부딪혔는지
         if not 0 <= self.snake.body[0].x < cell_number or \
                 not 0 <= self.snake.body[0].y < cell_number:
+            self.snake.hit_sound.play()
             self.game_over()
 
-        # check if snake hits itself
+        # 뱀이 스스로를 부딪히면
         for block in self.snake.body[1:]:
             if block == self.snake.body[0]:
                 self.game_over()
 
     def game_over(self):
         self.snake.reset()
-        # pygame.quit()
-        # sys.exit()
 
     def draw_grass(self):
         grass_color = (167, 209, 61)
@@ -122,6 +122,8 @@ class SNAKE:
             'Graphics/body_bl.png').convert_alpha()
 
         self.crunch_sound = pygame.mixer.Sound('Sound/crunch.wav')
+        self.background_sound = pygame.mixer.Sound('Sound/bg.mp3')
+        self.hit_sound = pygame.mixer.Sound('Sound/hit.mp3')
 
     def draw_snake(self):
         self.update_head_graphics()
