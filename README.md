@@ -5,6 +5,4 @@
 2. pip install pygame => pygame설치
 3. python snake.py => 게임 실행
 
-<!-- <video src="https://user-images.githubusercontent.com/61821825/110464594-a6a49680-8116-11eb-8cf6-6ae2faa8f466.mov"> -->
-<video src=".snake_game.mov">
-<!-- snake_game.mov -->
+![snake_game](https://user-images.githubusercontent.com/61821825/110465312-98a34580-8117-11eb-9ea7-7f890647ff1c.gif)
